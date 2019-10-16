@@ -1,0 +1,14 @@
+1.LoggerAspect，是日志的切面注解类
+   （1）这个类可以定义我们的切入规则
+       @Pointcut("@annotation(org.ljf.aopdemo.aop.utils.annotation.LJF)")
+                        public void cutMethod() {
+                        }
+                        这里表示的是切入点是方法上加入了LJF自定义注解的方法才会生效。
+   （2）定义通知类型及目标方法
+        @Before("cutMethod()")
+              public void begin() {
+                  System.out.println("==@Before== lingyejun blog logger : begin");
+              }
+              @Before表示的是前置通知，参数：表示的是目标方法是"cutMethod（）"
+   (3)使用的时候只需要再对应的方法上加上自定义注解就可以了，需要注意的是方法调用的时候需要用到必须是
+   spring 容器里面的对象，因为new出来的对象不是代理对象。
